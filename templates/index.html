@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja, Mantri, Chor, Sipahi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .result {
+            color: red;
+        }
+        .exit-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #f44336; /* Red background */
+            color: white; /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .exit-button:hover {
+            background-color: #d32f2f; /* Darker red on hover */
+        }
+    </style>
+    <script>
+        function exitGame() {
+            window.location.href = "{{ url_for('exit_game') }}";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Raja, Mantri, Chor, Sipahi</h1>
+        <form method="POST" action="{{ url_for('draw_roles') }}">
+            <button type="submit">Draw Roles</button>
+        </form>
+        {% if player_roles %}
+        <div id="roles" class="roles">
+            <div id="player1" class="player">Player 1 ({{ player_names[0] }}): 
+                {% if player_roles['player1'] in ['RAJA', 'SIPAHI'] %}
+                    <span id="role1">{{ player_roles['player1'] }}</span> 
+                {% else %}
+                    <span id="role1">-</span>
+                {% endif %}
+            </div>
+            <div id="player2" class="player">Player 2 ({{ player_names[1] }}): 
+                {% if player_roles['player2'] in ['RAJA', 'SIPAHI'] %}
+                    <span id="role2">{{ player_roles['player2'] }}</span> 
+                {% else %}
+                    <span id="role2">-</span>
+                {% endif %}
+            </div>
+            <div id="player3" class="player">Player 3 ({{ player_names[2] }}): 
+                {% if player_roles['player3'] in ['RAJA', 'SIPAHI'] %}
+                    <span id="role3">{{ player_roles['player3'] }}</span> 
+                {% else %}
+                    <span id="role3">-</span>
+                {% endif %}
+            </div>
+            <div id="player4" class="player">Player 4 ({{ player_names[3] }}): 
+                {% if player_roles['player4'] in ['RAJA', 'SIPAHI'] %}
+                    <span id="role4">{{ player_roles['player4'] }}</span> 
+                {% else %}
+                    <span id="role4">-</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% if guess_section %}
+        <form method="POST" action="{{ url_for('guess_chor') }}">
+            <div id="guess-section">
+                <h2>Sipahi, guess the Chor:</h2>
+                {% for player, role in player_roles.items() %}
+                    {% if role in ['MANTRI', 'CHOR'] %}
+                        <button type="submit" name="guess" value="{{ player }}">Player {{ loop.index }}</button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </form>
+        {% endif %}
+        {% if result %}
+        <div class="result" id="result">{{ result }}</div>
+        <div id="total-scores">
+            <h2>Total Scores:</h2>
+            <ul>
+                {% for player, score in player_scores.items() %}
+                    <li>Player {{ loop.index }}: {{ player_names[loop.index0] }} - Score: {{ score }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <button class="exit-button" onclick="exitGame()">Exit</button>
+    </div>
+</body>
+</html>

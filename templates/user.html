@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            background-color: purple;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background-color: purple;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #6a1b9a;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 40px); /* Height minus navbar height and padding */
+        }
+
+        .player-form {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .player-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Interacting Role Game</h1>
+    </div>
+    <div class="container">
+        <form action="/start" method="POST">
+            <div class="player-form">
+                <h2>Enter Player Names</h2>
+                <input type="text" placeholder="Player 1 Name" name="first">
+                <input type="text" placeholder="Player 2 Name" name="second">
+                <input type="text" placeholder="Player 3 Name" name="third">
+                <input type="text" placeholder="Player 4 Name" name="forth">
+                <button class="submit-btn">Start</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
